@@ -1,0 +1,45 @@
+<script lang="ts">
+	import { invalidateAll } from '$app/navigation';
+	import Card from '$lib/components/card.svelte';
+	import Carousel from '$lib/components/carousel.svelte';
+	import type { Item } from '$services/types';
+	import { onMount } from 'svelte';
+
+	onMount(() => invalidateAll());
+
+	/** @type {import('./$types').PageData} */
+	export let data: any;
+
+	let { endingSoonest, mostViews, highestPrice } = data;
+</script>
+
+<h1 class="text-3xl">Most Expensive</h1>
+<Carousel>
+	{#each highestPrice as item}
+		<div class="flex-1">
+			<Card {item} />
+		</div>
+	{/each}
+</Carousel>
+
+<hr class="my-8" />
+
+<h1 class="text-3xl">Ending Soonest</h1>
+<Carousel>
+	{#each endingSoonest as item}
+		<div class="flex-1">
+			<Card {item} />
+		</div>
+	{/each}
+</Carousel>
+
+<hr class="my-8" />
+
+<h1 class="text-3xl">Most Views</h1>
+<Carousel>
+	{#each mostViews as item}
+		<div class="flex-1">
+			<Card {item} showViews />
+		</div>
+	{/each}
+</Carousel>
